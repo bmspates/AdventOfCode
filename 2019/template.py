@@ -1,3 +1,3 @@
 import fileinput
 
-input = [ line.strip() for line in fileinput.input() ]
+data = [ line.strip() for line in open("inputs/day3.txt", 'r') ]
