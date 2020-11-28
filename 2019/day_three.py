@@ -1,69 +1,26 @@
-import fileinput, itertools, shapely
+import itertools
 
-class Point:
+def visit(wire):
+    visted = set()
+    location = (0, 0)
+    for move in wire:
+        direction = move[0]
+        magnitude = int(move[1:])
+        dx = {"R" : 1, "L" : -1, "U" : 0, "D" : 0}[direction]
+        dy = {"R" : 0, "L" : 0, "U" : 1, "D" : -1}[direction]
+        for _ in range(magnitude):
+            location = (location[0] + dx, location[1] +dy)
+            visted.add(location)
+    return visted
 
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+def manhattan_distance(point1, point2):
+    return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
 
-    def __str__(self):
-        return "(" + str(self.x) + ", " + str(self.y) + ")"
+data = [ line.strip() for line in open("inputs/day3.txt", 'r') ]
+wire1 = data[0].split(',')
+wire2 = data[1].split(',')
 
-    def __add__(self, other):
-        return Point(self.x + other.x, self.y + other.y)
-
-    def manhattan_distance(self, point):
-        return abs(self.x - point.x) + abs(self.y - point.y)
-
-class Line:
-    def __init__(self, start, direction, distance):
-        self.start = start
-        if direction == 'R':
-            self.end = Point(start.x + distance, start.y)
-        elif direction == 'L':
-            self.end = Point(start.x - distance, start.y)
-        elif direction == 'U':
-            self.end = Point(start.x, start.y + distance)
-        elif direction == 'D':
-            self.end = Point(start.x, start.y - distance)
-        self.distance = distance
-    
-    def __str__(self):
-        return "Start: " + str(self.start) + ", End: " + str(self.end)
-
-    def has_point(self, point):
-        return self.start.x <= point.x <= self.end.x and self.start.y <= point.y <= self.end.y
-
-    def intersect(self, other) -> Point:
-        if self.start.x == self.end.x and other.start.y == other.end.y:
-            intersection = Point(self.start.x, other.start.y)
-        elif self.start.y == self.end.y and other.start.x == other.end.x:
-            intersection = Point(other.start.x, self.start.y)
-        else:
-            return
-        if self.has_point(intersection) and other.has_point(intersection):
-            return intersection
-
-
-def make_list(wire):
-    line = []
-    current_point = Point(0, 0)
-    for i in range(len(wire) - 1):
-        line.append(Line(current_point, wire[i][0], int(wire[i][1:])))
-        current_point = line[i].end
-    return line
-
-
-data = [ line.strip() for line in open("inputs/tests/3/2.txt") ]
-wire1 = make_list(data[0].split(','))
-wire2 = make_list(data[1].split(','))
-
-intersection_points = []
-for l1, l2 in itertools.product(wire1, wire2):
-    p = l1.intersect(l2)
-    if p is not None:
-        intersection_points.append(p)
-
-zero = Point(0, 0)
-distances = [ p.manhattan_distance(zero) for p in intersection_points ]
+visted = visit(wire1)
+intersections = [ location for location in visit(wire2) if location in visted ]
+distances = [ manhattan_distance(point, (0, 0)) for point in intersections ]
 print(min(distances))
