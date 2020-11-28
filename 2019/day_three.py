@@ -1,6 +1,6 @@
 import itertools, sys
 
-def visit(wire, count_steps):
+def visit(wire):
     visited = set()
     location = (0, 0)
     step_map = dict()
@@ -13,13 +13,9 @@ def visit(wire, count_steps):
         for _ in range(magnitude):
             location = (location[0] + dx, location[1] + dy)
             steps += 1
-            if (count_steps):
-                step_map[location] = steps
+            step_map[location] = steps
             visited.add(location)
-    if count_steps:
-        return visited, step_map
-    else:
-        return visited
+    return visited, step_map
 
 def manhattan_distance(point1, point2):
     return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
@@ -28,13 +24,12 @@ data = [ line.strip() for line in open("inputs/day3.txt", 'r') ]
 wire1 = data[0].split(',')
 wire2 = data[1].split(',')
 
-visited = visit(wire1, False)
-intersections = visited & visit(wire2, False)
+visited1, steps1 = visit(wire1)
+visited2, steps2 = visit(wire2)
+intersections = visited1 & visited2
 distances = { manhattan_distance(point, (0, 0)) for point in intersections }
 print(min(distances))
 
-visited1, steps1 = visit(wire1, True)
-visited2, steps2 = visit(wire2, True)
 min_val = sys.maxsize
 for location in intersections:
     total_steps =  steps1[location] + steps2[location]
