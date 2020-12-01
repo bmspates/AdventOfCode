@@ -1,7 +1,7 @@
 import itertools, numpy
 
 def solve(data, n):
-    for nums in itertools.permutations(data, n):
+    for nums in itertools.combinations(data, n):
         if sum(nums) == 2020:
             return numpy.prod(nums)
 
