@@ -1,23 +1,10 @@
 import itertools, numpy
 
-def extend(data, n = 2):
-    tmp = []
-    for i, line in enumerate(data):
-        tmp.append([])
-        for _ in range(n):
-            for char in line:
-                tmp[i].append(char)
-    return tmp
-
 def solve(data, slope):
     x, y, count = slope[0], slope[1], 0
     while y < len(data):
-        try:
-            if data[y][x] == '#':
-                count += 1
-        except:
-            data = extend(data)
-            continue
+        if data[y % len(data)][x % len(data[0])] == '#':
+            count += 1
         x, y = x + slope[0], y + slope[1]
     return count
 
