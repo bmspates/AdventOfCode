@@ -10,6 +10,12 @@ SESSION=""
 [[ -z "$DAY" ]] && DAY=$(date +%d) || : 
 [[ -z "$YEAR" ]] && YEAR=$(date +%Y) || :
 
+if [[ ${DAY:0:1} = "0" ]]; then
+	DAY=${DAY:1:1}
+fi
+
+echo ${DAY:0:1}
+
 DATE=$(date +%s)
 PUZZLE_DATE=$(date -d "$YEAR"-12-"$DAY" +%s)
 
