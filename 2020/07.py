@@ -6,7 +6,6 @@ def count_bags(data, bag_check):
         count += int(data[bag_check][bag]) * count_bags(data, bag)
     return count
 
-
 def contain(data, bag_check, bag_to_hold):
     if bag_check is None:
         return False
