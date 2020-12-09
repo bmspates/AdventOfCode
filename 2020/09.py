@@ -9,7 +9,7 @@ def part_one(data):
     while flag:
         flag = False
         num = data[i]
-        for a, b in itertools.product(prev, prev):
+        for a, b in itertools.permutations(prev, 2):
             if num == a + b:
                 flag = True
                 break
@@ -30,4 +30,4 @@ data = [ int(line.strip()) for line in open("inputs/day9.txt", 'r') ]
 
 p1 = part_one(data)
 p2 = part_two(data, p1)
-print(p1, p2)
+print("{}\n{}".format(p1, p2))
