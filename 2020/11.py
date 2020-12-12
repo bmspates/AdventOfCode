@@ -35,7 +35,6 @@ class Seat:
                 if x + i * delta[0] not in range(0, len(Seat.data[0])) or  y + i * delta[1] not in range(0, len(Seat.data)): 
                     break
         return count
-
     
     def update_all(p_one = True):
         updates = {}
@@ -61,7 +60,6 @@ class Seat:
 
 
 def part_one(data):
-    Seat.determine_adjacencies(data)
     while(Seat.update_all()):
         pass
     return Seat.num_occupied()
@@ -86,6 +84,7 @@ for y, line in enumerate(data):
         row.append(char)
     layout.append(row)
 
+Seat.determine_adjacencies(data)
 print(part_one(layout))
 Seat.empty_all()
 print(part_two(layout))
