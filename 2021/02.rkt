@@ -4,8 +4,8 @@
 
 (define (main)
   (let ((input (split-input "inputs/day2.txt" " ")))
-	(values (part-one input 0 0)
-                (part-two input 0 0 0))))
+    (values (part-one input 0 0)
+            (part-two input 0 0 0))))
 
 (define (part-one input depth dist)
   (match input
