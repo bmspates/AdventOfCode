@@ -1,5 +1,5 @@
 #lang racket
-(provide read-lines read-nums split-input)
+(provide read-lines read-nums split-input read-binary-nums read-binary)
 
 ;; String -> [Listof String]
 (define (read-lines filename)
@@ -9,6 +9,18 @@
 ;; String -> [Listof Int]
 (define (read-nums filename)
   (map string->number (read-lines filename)))
+
+;; String -> [Listof Number]
+(define (read-binary-nums filename)
+  (map string->number (map string-append "#b" (read-lines filename))))
+
+;; String -> [Listof [Listof Int]]
+(define (read-binary filename)
+  (map (lambda (s)
+         (map (lambda (c)
+                (- (char->integer c) 48))
+              (string->list s)))
+       (read-lines filename)))
 
 ;; [Listof String] -> [Listof [Listof String]]
 (define (split-input filename delim)
