@@ -8,7 +8,7 @@ def solve(data, slope):
         x, y = x + slope[0], y + slope[1]
     return count
 
-data = [ line.strip() for line in open("inputs/day3.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day3.txt", 'r') ]
 tmp = []
 for row in data:
     tmp.append([ char for char in row ])

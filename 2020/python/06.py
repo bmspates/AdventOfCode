@@ -8,7 +8,7 @@ def part_two(data):
     return count
 
 
-data = [ line.strip() for line in open("inputs/day6.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day6.txt", 'r') ]
 
 answers, questions, people = [], dict(), 0
 for line in data:

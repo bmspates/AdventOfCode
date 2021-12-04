@@ -20,7 +20,7 @@ def part_two(data):
     return ret_val
 
 
-data = [ line.strip().split(' ') for line in open("inputs/day02.txt", 'r') ]
+data = [ line.strip().split(' ') for line in open("../inputs/day02.txt", 'r') ]
 
 print(part_one(data.copy()))
 print(part_two(data.copy()))

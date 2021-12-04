@@ -26,7 +26,7 @@ def part_two(data, n):
                 return min(data[l:r+1]) + max(data[l:r+1])
 
 
-data = [ int(line.strip()) for line in open("inputs/day9.txt", 'r') ]
+data = [ int(line.strip()) for line in open("../inputs/day9.txt", 'r') ]
 
 p1 = part_one(data)
 p2 = part_two(data, p1)

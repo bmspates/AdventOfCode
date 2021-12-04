@@ -10,7 +10,7 @@ def part_two(data):
     pass
 
 
-data = [ line.strip() for line in open("inputs/day_.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day_.txt", 'r') ]
 
 # Data processing here
 

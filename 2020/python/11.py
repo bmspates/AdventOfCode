@@ -70,8 +70,8 @@ def part_two(data):
     return Seat.num_occupied()
 
 
-data = [ line.strip() for line in open("inputs/day11.txt", 'r') ]
-# data = [ line.strip() for line in open("inputs/tests/11.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day11.txt", 'r') ]
+# data = [ line.strip() for line in open("../inputs/tests/11.txt", 'r') ]
 
 layout = []
 for y, line in enumerate(data):

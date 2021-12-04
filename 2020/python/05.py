@@ -25,7 +25,7 @@ def solve(data):
         if id not in IDs and id + 1 in IDs and id - 1 in IDs:
             return max(IDs), id
 
-data = [ line.strip() for line in open("inputs/day5.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day5.txt", 'r') ]
 
 list_ = []
 for i, line in enumerate(data):

@@ -34,8 +34,8 @@ def num_paths(data, index, counts):
         counts[index] = count
     return count
 
-data = [ int(line.strip()) for line in open("inputs/day10.txt", 'r') ]
-# data = [ int(line.strip()) for line in open("inputs/tests/10.txt", 'r') ]
+data = [ int(line.strip()) for line in open("../inputs/day10.txt", 'r') ]
+# data = [ int(line.strip()) for line in open("../inputs/tests/10.txt", 'r') ]
 
 data.append(max({ num for num in data}) + 3)
 data.sort()

@@ -24,7 +24,7 @@ def part_one(data):
 def part_two(data, bag_check):
     return count_bags(data, bag_check) - 1
 
-data = [ line.strip() for line in open("inputs/day7.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day7.txt", 'r') ]
 
 bags = dict()
 for line in data:

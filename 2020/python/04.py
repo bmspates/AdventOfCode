@@ -36,7 +36,7 @@ def solve(data):
     return count1, count2
 
 
-data = [ line.strip() for line in open("inputs/day4.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day4.txt", 'r') ]
 
 passports = []
 map_ = dict()

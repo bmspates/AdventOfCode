@@ -22,8 +22,8 @@ def part_two(data):
 
 
 
-data = [ line.strip() for line in open("inputs/day8.txt", 'r') ]
-# data = [ line.strip() for line in open("inputs/tests/08.txt", 'r') ]
+data = [ line.strip() for line in open("../inputs/day8.txt", 'r') ]
+# data = [ line.strip() for line in open("../inputs/tests/08.txt", 'r') ]
 
 instructions = []
 for line in data:
