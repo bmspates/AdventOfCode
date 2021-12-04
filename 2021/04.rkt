@@ -27,22 +27,16 @@
 (define (row? board row-num nums)
   (andmap (lambda (x) (member x nums)) (list-ref board row-num)))
 
-(define (col? board col-num nums i)
-  (if (= i 5) #t
-      (if (member (list-ref (list-ref board i) col-num) nums)
-          (col? board col-num nums (add1 i))
-          #f)))
-
-(define (bingo? board nums i)
+(define (bingo? board tboard nums i)
   (if (= i 5) #f
-      (if (or (row? board i nums) (col? board i nums 0))
+      (if (or (row? board i nums) (row? tboard i nums))
           #t
-          (bingo? board nums (add1 i)))))
+          (bingo? board tboard nums (add1 i)))))
 
 (define (bingos boards nums)
   (match boards
     ['() '()]
-    [(cons b ls) (if (bingo? b nums 0) (cons b (bingos ls nums)) (bingos ls nums))]))
+    [(cons b ls) (if (bingo? b (transpose b) nums 0) (cons b (bingos ls nums)) (bingos ls nums))]))
 
 (define (score board nums i sum)
   (if (= i 5)
@@ -54,19 +48,23 @@
                     (list-ref board i)))))
 
 (define (step nums boards i)
-  (match (bingos boards (take nums i))
-    ['() (step nums boards (add1 i))]
-    [(cons a ls) (score a (take nums i) 0 0)]))
+  (let ((picks (take nums i)))
+    (match (bingos boards picks)
+      ['() (step nums boards (add1 i))]
+      [(cons a ls) (score a picks 0 0)])))
 
 (define (part-one nums boards)
   (step nums boards 0))
 
 (define (step-last nums lose i)
-  (match (length lose)
-    [1 (if (bingo? (car lose) (take nums i) 0)
-           (score (car lose) (take nums i) 0 0)
-           (step-last nums lose (add1 i)))]
-    [_ (step-last nums (filter (lambda (b) (not (bingo? b (take nums i) 0))) lose) (add1 i))]))
+  (let ((picks (take nums i)))
+    (match (length lose)
+      [1 (if (bingo? (car lose) (transpose (car lose)) picks 0)
+             (score (car lose) picks 0 0)
+             (step-last nums lose (add1 i)))]
+      [_ (step-last nums
+                    (filter (lambda (b) (not (bingo? b (transpose b) picks 0))) lose)
+                    (add1 i))])))
 
 (define (part-two nums boards)
   (step-last nums boards 0))

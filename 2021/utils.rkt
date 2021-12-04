@@ -1,5 +1,9 @@
 #lang racket
-(provide make-binary parse-binary sum-lists string->int-list)
+(provide make-binary parse-binary sum-lists string->int-list transpose)
+
+;; [Listof [Listof _]] -> [Listof [Listof _]]
+(define (transpose ls)
+  (apply map list ls))
 
 ;; [Listof Integer] -> Integer
 (define (parse-binary ls)
