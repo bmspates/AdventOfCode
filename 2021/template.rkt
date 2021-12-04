@@ -1,11 +1,11 @@
 #lang racket
-(require "input.rkt")
+(require "input.rkt" "utils.rkt")
 (provide main)
 
 (define (main)
   (let ((input (read-lines "inputs/day_.txt")))
-	(values (part-one input)
-                (part-two input))))
+    (values (part-one input)
+            (part-two input))))
 
 (define (part-one input)
   0)

@@ -1,5 +1,5 @@
 #lang racket
-(provide make-binary parse-binary sum-lists)
+(provide make-binary parse-binary sum-lists string->int-list)
 
 ;; [Listof Integer] -> Integer
 (define (parse-binary ls)
@@ -21,3 +21,6 @@
   (match ls
     ['() sum]
     [(cons x ls) (sum-lists_ ls (map + x sum))]))
+
+(define (string->int-list s sep)
+  (map string->number (filter non-empty-string? (string-split s sep))))
