@@ -1,5 +1,5 @@
 #lang racket
-(provide sum-lists string->int-list transpose)
+(provide (all-defined-out))
 
 ;; [Listof [Listof _]] -> [Listof [Listof _]]
 (define (transpose ls)
@@ -14,12 +14,11 @@
 ;; Sums each element listwise
 ;; [Listof [Listof Integer]] -> [Listof Integer]
 (define (sum-lists ls)
-  (sum-lists_ (cdr ls) (car ls)))
-
-(define (sum-lists_ ls sum)
-  (match ls
+  (define (helper ls sum)
+      (match ls
     ['() sum]
-    [(cons x ls) (sum-lists_ ls (map + x sum))]))
+    [(cons x ls) (helper ls (map + x sum))]))
+  (helper (cdr ls) (car ls)))
 
 (define (string->int-list s sep)
   (map string->number (filter non-empty-string? (string-split s sep))))
