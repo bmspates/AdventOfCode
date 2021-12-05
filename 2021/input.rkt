@@ -1,4 +1,5 @@
 #lang racket
+(require "binary.rkt")
 (provide read-lines read-nums split-input read-binary-nums read-binary read-num-lines)
 
 ;; Int File -> [Listof String]
@@ -23,12 +24,9 @@
 (define (read-binary-nums filename)
   (map string->number (map string-append "#b" (read-lines filename))))
 
-;; String -> [Listof [Listof Int]]
+;; String -> [Listof Binary]
 (define (read-binary filename)
-  (map (lambda (s)
-         (map (lambda (c)
-                (- (char->integer c) 48))
-              (string->list s)))
+  (map string->binary
        (read-lines filename)))
 
 ;; [Listof String] -> [Listof [Listof String]]

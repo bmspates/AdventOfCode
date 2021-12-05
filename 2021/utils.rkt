@@ -1,20 +1,15 @@
 #lang racket
-(provide make-binary parse-binary sum-lists string->int-list transpose)
+(provide sum-lists string->int-list transpose)
 
 ;; [Listof [Listof _]] -> [Listof [Listof _]]
 (define (transpose ls)
   (apply map list ls))
 
-;; [Listof Integer] -> Integer
-(define (parse-binary ls)
-  (make-binary ls identity))
-
-;; [Listof Integer] Procedure -> Integer
-(define (make-binary ls proc)
-  (string->number
-   (string-append "#b" (list->string
-                        (map (lambda (x) (integer->char (+ 48 x)))
-                             (map proc ls))))))
+(define (sum-lists-map ls proc)
+  (define/match (helper ls proc sum)
+    [('() _ _) sum]
+    [((cons x ls) _ _) (helper ls (map + (map proc x) sum))])
+  (helper ls proc 0))
 
 ;; Sums each element listwise
 ;; [Listof [Listof Integer]] -> [Listof Integer]
