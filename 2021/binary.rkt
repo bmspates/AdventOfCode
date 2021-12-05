@@ -14,9 +14,12 @@
 (define (get-bit b num)
   (list-ref (binary-bits b) num))
 
+;; Maps the procedure to every bit, returning the value
+;; Binary Procedure -> Binary
 (define (binary-map b proc)
   (binary (map proc (binary-bits b))))
 
+;; String -> Binary
 (define (string->binary str)
   (binary (map (lambda (x) (- (char->integer x) 48))
                (string->list str))))
