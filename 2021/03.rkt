@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/gui
 (require "input.rkt" "utils.rkt" "binary.rkt")
 (provide main)
 
@@ -17,8 +17,8 @@
 (define (part-one input)
   (let* ([sum (sum-binary-list input)]
          [half (/ (length input) 2)]
-         [gamma (make-binary sum (lambda (x) (if (> x half) 1 0)))]
-         [epsilon (make-binary sum (lambda (x) (if (> x half) 0 1)))])
+         [gamma (make-binary sum (λ (x) (if (> x half) 1 0)))]
+         [epsilon (make-binary sum (λ (x) (if (> x half) 0 1)))])
     (binary->number (binary-mult gamma epsilon))))
 
 ;; Counts the most (or least) common bit value for ls[bit-num]
@@ -41,7 +41,7 @@
     [1 (car ls)]
     [_ (if (= i len) (car ls)
      (let ([common (common-value ls i 0 0 proc default)])
-         (det-rate (filter (lambda (b) (= common (get-bit b i))) ls)
+         (det-rate (filter (λ (b) (= common (get-bit b i))) ls)
                    proc default (add1 i) len)))]))
 
 (define (part-two input)

@@ -31,7 +31,7 @@
 
 ;; [Listof String] -> [Listof [Listof String]]
 (define (split-input filename delim)
-  (map (lambda (s) (string-split s delim)) (read-lines filename)))
+  (map (λ (s) (string-split s delim)) (read-lines filename)))
 
 (define (read-all p)
   (let ((l (read-line p)))

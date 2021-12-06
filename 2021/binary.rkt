@@ -21,12 +21,12 @@
 
 ;; String -> Binary
 (define (string->binary str)
-  (binary (map (lambda (x) (- (char->integer x) 48))
+  (binary (map (λ (x) (- (char->integer x) 48))
                (string->list str))))
 
 ;; Binary -> String
 (define (binary->string b)
-  (foldl (lambda (x res) (string-append res (number->string x)))
+  (foldl (λ (x res) (string-append res (number->string x)))
          "" (binary-bits b)))
 
 ;; Binary -> Number
@@ -35,7 +35,7 @@
 
 ;; Number -> Binary
 (define (number->binary n)
-  (binary (map (lambda (x) (- x 48)) (map char->integer
+  (binary (map (λ (x) (- x 48)) (map char->integer
                                           (string->list (number->string n 2))))))
 
 ;; Binary Binary -> Binary

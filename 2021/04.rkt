@@ -25,7 +25,7 @@
              (part-two nums (car boards)))]))
 
 (define (row? board row-num nums)
-  (andmap (lambda (x) (member x nums)) (list-ref board row-num)))
+  (andmap (λ (x) (member x nums)) (list-ref board row-num)))
 
 (define (bingo? board tboard nums i)
   (if (= i 5) #f
@@ -42,7 +42,7 @@
   (if (= i 5)
       (* (last nums) sum)
       (score board nums (add1 i)
-             (foldl (lambda (x res)
+             (foldl (λ (x res)
                       (+ res (if (member x nums) 0 x)))
                     sum
                     (list-ref board i)))))
@@ -63,7 +63,7 @@
              (score (car lose) picks 0 0)
              (step-last nums lose (add1 i)))]
       [_ (step-last nums
-                    (filter (lambda (b) (not (bingo? b (transpose b) picks 0))) lose)
+                    (filter (λ (b) (not (bingo? b (transpose b) picks 0))) lose)
                     (add1 i))])))
 
 (define (part-two nums boards)
