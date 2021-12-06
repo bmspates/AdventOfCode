@@ -23,9 +23,6 @@
         (add-points l h diag?))
       (count-overlap h 2))))
 
-(define (solve-fast input)
-  (void)) ;; TODO, instead of adding every single point maybe loop over permutations and check for intersection points, add those to set
-
 (define (add-points l h diag?)
   (if (and (not diag?) (line-diag? l))
       (void)
