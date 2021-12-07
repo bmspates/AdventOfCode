@@ -1,6 +1,6 @@
 #lang racket
-(require "binary.rkt")
-(provide read-lines read-nums split-input read-binary-nums read-binary read-num-lines)
+(require "binary.rkt" "utils.rkt")
+(provide (all-defined-out))
 
 ;; Int File -> [Listof String]
 (define (read-num-lines n p)
@@ -19,6 +19,9 @@
 ;; String -> [Listof Int]
 (define (read-nums filename)
   (map string->number (read-lines filename)))
+
+(define (read-num-list filename)
+  (string->int-list (read-line (open-input-file filename)) ","))
 
 ;; String -> [Listof Int]
 (define (read-binary-nums filename)
