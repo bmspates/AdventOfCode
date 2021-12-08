@@ -42,3 +42,4 @@
 
 (define (solve input proc)
   (foldl + 0 (map proc (map count-line input))))
+

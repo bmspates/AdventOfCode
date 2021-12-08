@@ -16,3 +16,4 @@
 (define (solve input fc)
   (foldl (λ (a res) (min res (cost-move-to input a fc)))
          (expt 2 64) (build-list (length input) values)))
+(main)
