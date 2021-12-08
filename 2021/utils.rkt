@@ -22,3 +22,9 @@
 
 (define (string->int-list s sep)
   (map string->number (filter non-empty-string? (string-split s sep))))
+
+(define (string->set s)
+  (list->set (string->list s)))
+
+(define (list->number x)
+  (string->number (list->string (reverse (map (λ (x) (integer->char (+ 48 x))) x)))))

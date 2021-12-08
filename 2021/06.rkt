@@ -3,7 +3,7 @@
 (provide main)
 
 (define (main)
-  (let ((input (string->int-list (car (read-lines "inputs/day6.txt")) ",")))
+  (let ((input (string->int-list (car (read-lines "inputs/day6test.txt")) ",")))
     (values (solve input 80)
             (solve input 256))))
 
