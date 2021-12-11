@@ -16,12 +16,18 @@
   (let ((p (open-input-file filename)))
     (read-all p)))
 
+;; String -> [Vectorof [Vectorof Number]]
+(define (read-lines->2v filename)
+  (vector-map (λ (x) (string->int-vec x ""))
+              (list->vector (read-lines filename))))
+
 ;; String -> [Listof Int]
 (define (read-nums filename)
   (map string->number (read-lines filename)))
 
+;; String -> [Listof Int]
 (define (read-num-list filename)
-  (string->int-list (read-line (open-input-file filename)) ","))
+  (string->int-list "," (read-line (open-input-file filename))))
 
 ;; String -> [Listof Int]
 (define (read-binary-nums filename)
@@ -36,6 +42,7 @@
 (define (split-input filename delim)
   (map (λ (s) (string-split s delim)) (read-lines filename)))
 
+;; Port -> [Listof String]
 (define (read-all p)
   (let ((l (read-line p)))
     (if (eof-object? l)

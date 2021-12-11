@@ -5,7 +5,7 @@
 (define (parse-board ls)
   (match ls
     ['() '()]
-    [(cons str rem) (cons (string->int-list str " ") (parse-board rem))]
+    [(cons str rem) (cons (string->int-list " " str) (parse-board rem))]
     [str (cons str '())]))
 
 (define (parse-boards file)
@@ -15,7 +15,7 @@
         (cons board (parse-boards file)))))
 
 (define (parse-input file)
-  (let ([nums (string->int-list (car (read-num-lines 1 file)) ",")])
+  (let ([nums (string->int-list "," (car (read-num-lines 1 file)))])
     (list nums (parse-boards file))))
     
 (define (main)
