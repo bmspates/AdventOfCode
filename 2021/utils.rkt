@@ -33,6 +33,9 @@
 (define (string->int-list sep s)
   (map string->number (filter non-empty-string? (string-split s sep))))
 
+(define (int-list->string sep ls)
+  (string-join (map (λ (x) (number->string x)) ls) sep))
+
 ;; String String -> [Vectorof Number]
 ;; Ex: (string->int-vec "," "1,2,3") -> '#(1 2 3)
 (define (string->int-vec s sep)
@@ -69,6 +72,12 @@
   (for ((row (vector-length vec)))
     (vector-map! proc (vector-ref vec row))))
 
+(define (map2l proc ls)
+  (match ls
+    ('() '())
+    ((cons a ls)
+     (cons (map proc a) (map2l proc ls)))))
+
 ;; [Vectorof [Vectorof X]] Number Number (X -> Y) -> Y
 (define (update2v vec r c proc [default #f])
   (if (and (<= 0 r) (<= 0 c) (> (vector-length vec) r) (> (vector-length (vector-ref vec r)) c))
@@ -78,11 +87,6 @@
 
 (define (length2v vec)
   (* (vector-length vec) (vector-length (vector-ref vec 0))))
-
-(define (while cond body)
-  (when (cond)
-    (body)
-    (while cond body)))
 
 (define (list->pair ls)
   (cons (first ls) (second ls)))

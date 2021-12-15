@@ -1,21 +1,13 @@
 #lang racket
+(require "point.rkt")
 (provide (all-defined-out))
 
-(struct point (x y) #:transparent)
 ;; While lines can be any angle, many functions are only designed
 ;;  for horizantal, vertical, or (maybe) 45 degree diagonals.
 (struct line (p1 p2) #:transparent)
 
-(define (bottom-right points)
-  (point (foldl (λ (x res) (if (> (point-x x) res) (point-x x) res)) 0 points)
-         (foldl (λ (x res) (if (> (point-y x) res) (point-y x) res)) 0 points)))
-
 (define (line-swap l)
   (line (line-p2 l) (line-p1 l)))
-
-;; [String . String] -> Point
-(define (make-point p)
-  (point (string->number (car p)) (string->number (cadr p))))
 
 (define (op-x l op)
   (op (point-x (line-p1 l)) (point-x (line-p2 l))))
