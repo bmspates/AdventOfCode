@@ -2,7 +2,7 @@
 (provide (all-defined-out))
 
 ;; [Listof [Listof X]] -> [Listof [Listof X]]
-(define (transpose ls)
+(define (transpose_ ls)
   (apply map list ls))
 
 ;; [Listof [Listof X]] (X -> Number) -> Number
@@ -83,3 +83,22 @@
   (when (cond)
     (body)
     (while cond body)))
+
+(define (list->pair ls)
+  (cons (first ls) (second ls)))
+
+(define (upcase? s)
+  (equal? s (string-upcase s)))
+
+(define (downcase? s)
+  (equal? s (string-downcase s)))
+
+(define (num-lower ls)
+  (match ls
+    ['() 0]
+    [(cons x ls) (+ (if (and (downcase? x) (not (member x '("start" "end"))))
+                        1 0)
+                    (num-lower ls))]))
+
+(define (set-filter proc s)
+  (list->set (filter proc (set->list s))))

@@ -40,7 +40,10 @@
 
 ;; [Listof String] -> [Listof [Listof String]]
 (define (split-input filename delim)
-  (map (λ (s) (string-split s delim)) (read-lines filename)))
+  (split-list (read-lines filename) delim))
+
+(define (split-list list delim)
+  (map (λ (s) (string-split s delim)) list))
 
 ;; Port -> [Listof String]
 (define (read-all p)
@@ -48,3 +51,9 @@
     (if (eof-object? l)
         '()
         (cons l (read-all p)))))
+
+(define (strip-newlines ls)
+  (match ls
+    ['() '()]
+    [(cons "" ls) (strip-newlines ls)]
+    [(cons x ls) (cons x (strip-newlines ls))]))
