@@ -1,2 +1,4 @@
 compiled/
 *.rkt~
+16.rkt
+day16*
